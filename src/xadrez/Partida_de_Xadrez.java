@@ -25,6 +25,13 @@ public class Partida_de_Xadrez {
 		return matriz;
 	}
 	
+	public boolean [][] possiveisMovimentos(XadrezPosicao posicaoDeOrigem){
+		Posicao posicao = posicaoDeOrigem.toPosicao();
+		validacaoPosicaoDeOrigem(posicao);
+		return tabuleiro.peca(posicao).movimentosPossiveis();
+		
+	}
+	
 	public Peca_de_Xadrez realizarMovimentoDeXadrez(XadrezPosicao posicaoOrigem,XadrezPosicao posicaoDestino) {
 		Posicao origem = posicaoOrigem.toPosicao();
 		Posicao destino = posicaoDestino.toPosicao();
@@ -80,6 +87,8 @@ public class Partida_de_Xadrez {
 		coloqueUmaNovaPeca('e', 8, new Torre(tabuleiro, Color.BLACK));
 		coloqueUmaNovaPeca('d', 8, new Rei(tabuleiro, Color.BLACK));
 	}
+	
+	
 	
 	
 
