@@ -23,5 +23,10 @@ public abstract class Peca_de_Xadrez extends Peca {
 	}
 
 	
+	public XadrezPosicao getXadrezPosicao() {
+		return XadrezPosicao.dePosicao(posicao);
+		
+	}
+	
 
 }
