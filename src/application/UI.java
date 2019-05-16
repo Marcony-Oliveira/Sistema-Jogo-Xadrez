@@ -33,11 +33,11 @@ public class UI {
 	public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
-	
+
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
 	public static void limpaTela() {
-	System.out.print("\033[H\033[2J");
-	System.out.flush();
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
 	}
 
 	public static XadrezPosicao lerPosicaoXadrez(Scanner read) {
@@ -53,36 +53,44 @@ public class UI {
 
 	}
 
-	public static void impressaoJogo(Partida_de_Xadrez partidaDeXadrez, List <Peca_de_Xadrez> capturadas) {
+	public static void impressaoJogo(Partida_de_Xadrez partidaDeXadrez, List<Peca_de_Xadrez> capturadas) {
 		placaImpressao(partidaDeXadrez.getPecas());
 		System.out.println();
 		imprimePecasCapturadas(capturadas);
 		System.out.println();
 		System.out.println("Turno : " + partidaDeXadrez.getTurno());
-		System.out.println("Aguardando jogador : " + partidaDeXadrez.getCorJogadorAtual());
-		if(partidaDeXadrez.getCheck()) {
-			System.out.println("CHECK!");
+
+		if (!partidaDeXadrez.getCheckMate()) {
+			System.out.println("Aguardando jogador : " + partidaDeXadrez.getCorJogadorAtual());
+			
+			if (partidaDeXadrez.getCheck()) {
+				System.out.println("CHECK!");
+			}
+		} 
+		else {
+			System.out.println("CHECK MATE!");
+			System.out.println("VENCEDOR : " + partidaDeXadrez.getCorJogadorAtual());
 		}
-		
+
 	}
-	
+
 	public static void placaImpressao(Peca_de_Xadrez[][] pecas) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j],false);
+				imprimePeca(pecas[i][j], false);
 			}
 			System.out.println();
 		}
 		System.out.println("  a b c d e f g h");
 
 	}
-	
-	public static void placaImpressao(Peca_de_Xadrez[][] pecas, boolean [][] movimentosPossiveis) {
+
+	public static void placaImpressao(Peca_de_Xadrez[][] pecas, boolean[][] movimentosPossiveis) {
 		for (int i = 0; i < pecas.length; i++) {
 			System.out.print((8 - i) + " ");
 			for (int j = 0; j < pecas.length; j++) {
-				imprimePeca(pecas[i][j],movimentosPossiveis[i][j]);
+				imprimePeca(pecas[i][j], movimentosPossiveis[i][j]);
 			}
 			System.out.println();
 		}
@@ -90,12 +98,12 @@ public class UI {
 
 	}
 
-	private static void imprimePeca(Peca_de_Xadrez piece,boolean background) {
-		if(background) {
+	private static void imprimePeca(Peca_de_Xadrez piece, boolean background) {
+		if (background) {
 			System.out.print(ANSI_BLUE_BACKGROUND);
 		}
 		if (piece == null) {
-			System.out.print("-"+ ANSI_RESET);
+			System.out.print("-" + ANSI_RESET);
 		} else {
 			if (piece.getColor() == Color.WHITE) {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
@@ -105,21 +113,22 @@ public class UI {
 		}
 		System.out.print(" ");
 	}
-	
-	private static void imprimePecasCapturadas(List <Peca_de_Xadrez> capturadas  ) {
-		List <Peca_de_Xadrez> white = capturadas.stream().filter(x -> x.getColor() == Color.WHITE).collect(Collectors.toList());
-		List <Peca_de_Xadrez> black = capturadas.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
+
+	private static void imprimePecasCapturadas(List<Peca_de_Xadrez> capturadas) {
+		List<Peca_de_Xadrez> white = capturadas.stream().filter(x -> x.getColor() == Color.WHITE)
+				.collect(Collectors.toList());
+		List<Peca_de_Xadrez> black = capturadas.stream().filter(x -> x.getColor() == Color.BLACK)
+				.collect(Collectors.toList());
 		System.out.println("** Pecas capturadas **");
 		System.out.print("BRANCO: ");
 		System.out.print(ANSI_WHITE);
-		System.out.println(Arrays.toString(white.toArray())); //Imprime array com valores
+		System.out.println(Arrays.toString(white.toArray())); // Imprime array com valores
 		System.out.print(ANSI_RESET);
-		
+
 		System.out.print("PRETO: ");
 		System.out.print(ANSI_YELLOW);
-		System.out.println(Arrays.toString(black.toArray())); //Imprime array com valores
+		System.out.println(Arrays.toString(black.toArray())); // Imprime array com valores
 		System.out.print(ANSI_RESET);
-		
-		
+
 	}
 }
