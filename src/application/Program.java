@@ -21,7 +21,7 @@ public class Program {
         List <Peca_de_Xadrez> capturadas = new ArrayList<>();		
 		
         
-        while(!partidaXadrez.getCheckMate()) { //ok
+        while(true) { 
 			try {
 			    UI.limpaTela();
 		        UI.impressaoJogo(partidaXadrez,capturadas); 
@@ -54,8 +54,7 @@ public class Program {
 			
 		}
         
-        UI.limpaTela();
-        UI.impressaoJogo(partidaXadrez, capturadas);
+        
 	}
 
 }
