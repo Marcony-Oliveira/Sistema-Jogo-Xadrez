@@ -7,6 +7,8 @@ import tabuleiro.Tabuleiro;
 public abstract class Peca_de_Xadrez extends Peca {
 	
 	private Color color;
+	private int contagemMovimentos;
+	
 
 	public Peca_de_Xadrez(Tabuleiro tabuleiro, Color color) {
 		super(tabuleiro);
@@ -15,6 +17,18 @@ public abstract class Peca_de_Xadrez extends Peca {
 
 	public Color getColor() {
 		return color;
+	}
+	
+	public int getContagemMovimentos() {
+		return contagemMovimentos;
+	}
+	
+	public void incrementaContagemMovimentos() {
+		contagemMovimentos++;
+	}
+	
+	public void decrementaContagemMovimentos() {
+		contagemMovimentos--;
 	}
 	
 	protected boolean existePecaAdversaria(Posicao posicao) {
