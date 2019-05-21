@@ -99,8 +99,26 @@ public class Partida_de_Xadrez {
 			capturedPieces.add(capturedPiece);
 		}
 		
+		//Jogada especial Castling proximo do rei
+		if(p instanceof Rei && target.getColuna() == source.getColuna() + 2) {
+			Posicao sourceT = new Posicao (source.getLinha(), source.getColuna() + 3);
+			Posicao targetT = new Posicao (source.getLinha(), source.getColuna() + 1);
+			Peca_de_Xadrez torre = (Peca_de_Xadrez)board.removePeca(sourceT);
+			board.lugar_da_Peca(torre, targetT);
+			torre.incrementaContagemMovimentos();
+		}
+		//Jogada especial Castling distante do rei
+				if(p instanceof Rei && target.getColuna() == source.getColuna() - 2) {
+					Posicao sourceT = new Posicao (source.getLinha(), source.getColuna() - 4);
+					Posicao targetT = new Posicao (source.getLinha(), source.getColuna() - 1);
+					Peca_de_Xadrez torre = (Peca_de_Xadrez)board.removePeca(sourceT);
+					board.lugar_da_Peca(torre, targetT);
+					torre.incrementaContagemMovimentos();
+				}
+		
 		return capturedPiece;
 	}
+	
 	
 	private void undoMove(Posicao source, Posicao target, Peca capturedPiece) {
 		Peca_de_Xadrez p = (Peca_de_Xadrez)board.removePeca(target);
@@ -112,7 +130,25 @@ public class Partida_de_Xadrez {
 			capturedPieces.remove(capturedPiece);
 			piecesOnTheBoard.add(capturedPiece);
 		}
+		
+		//Jogada especial Castling proximo do rei
+				if(p instanceof Rei && target.getColuna() == source.getColuna() + 2) {
+					Posicao sourceT = new Posicao (source.getLinha(), source.getColuna() + 3);
+					Posicao targetT = new Posicao (source.getLinha(), source.getColuna() + 1);
+					Peca_de_Xadrez torre = (Peca_de_Xadrez)board.removePeca(targetT);
+					board.lugar_da_Peca(torre, sourceT);
+					torre.decrementaContagemMovimentos();
+				}
+				//Jogada especial Castling distante do rei
+						if(p instanceof Rei && target.getColuna() == source.getColuna() - 2) {
+							Posicao sourceT = new Posicao (source.getLinha(), source.getColuna() - 4);
+							Posicao targetT = new Posicao (source.getLinha(), source.getColuna() - 1);
+							Peca_de_Xadrez torre = (Peca_de_Xadrez)board.removePeca(targetT);
+							board.lugar_da_Peca(torre, sourceT);
+							torre.decrementaContagemMovimentos();;
+						}
 	}
+	
 	
 	private void validateSourcePosition(Posicao position) {
 		if (!board.temUmaPecaNaPosicao(position)) {
@@ -199,7 +235,7 @@ public class Partida_de_Xadrez {
 		placeNewPiece('b', 1, new Cavalo(board, Color.WHITE));
         placeNewPiece('c', 1, new Bispo(board, Color.WHITE));
         placeNewPiece('d', 1, new Rainha(board, Color.WHITE));
-        placeNewPiece('e', 1, new Rei(board, Color.WHITE));
+        placeNewPiece('e', 1, new Rei(board, Color.WHITE, this));
         placeNewPiece('f', 1, new Bispo(board, Color.WHITE));
         placeNewPiece('g', 1, new Cavalo(board, Color.WHITE));
         placeNewPiece('h', 1, new Torre(board, Color.WHITE));
@@ -216,7 +252,7 @@ public class Partida_de_Xadrez {
         placeNewPiece('b', 8, new Cavalo(board, Color.BLACK));
         placeNewPiece('c', 8, new Bispo(board, Color.BLACK));
         placeNewPiece('d', 8, new Rainha(board, Color.BLACK));
-        placeNewPiece('e', 8, new Rei(board, Color.BLACK));
+        placeNewPiece('e', 8, new Rei(board, Color.BLACK, this));
         placeNewPiece('f', 8, new Bispo(board, Color.BLACK));
         placeNewPiece('g', 8, new Cavalo(board, Color.BLACK));
         placeNewPiece('h', 8, new Torre(board, Color.BLACK));
