@@ -8,6 +8,7 @@ import tabuleiro.Peca;
 import tabuleiro.Posicao;
 import tabuleiro.Tabuleiro;
 import xadrez.pecas.Bispo;
+import xadrez.pecas.Cavalo;
 import xadrez.pecas.Peao;
 import xadrez.pecas.Rei;
 import xadrez.pecas.Torre;
@@ -194,9 +195,11 @@ public class Partida_de_Xadrez {
 	private void config_Inicial() {
 		
 		placeNewPiece('a', 1, new Torre(board, Color.WHITE));
+		placeNewPiece('b', 1, new Cavalo(board, Color.WHITE));
         placeNewPiece('c', 1, new Bispo(board, Color.WHITE));
         placeNewPiece('e', 1, new Rei(board, Color.WHITE));
         placeNewPiece('f', 1, new Bispo(board, Color.WHITE));
+        placeNewPiece('g', 1, new Cavalo(board, Color.WHITE));
         placeNewPiece('h', 1, new Torre(board, Color.WHITE));
         placeNewPiece('a', 2, new Peao(board, Color.WHITE));
         placeNewPiece('b', 2, new Peao(board, Color.WHITE));
@@ -208,9 +211,11 @@ public class Partida_de_Xadrez {
         placeNewPiece('h', 2, new Peao(board, Color.WHITE));
 
         placeNewPiece('a', 8, new Torre(board, Color.BLACK));
+        placeNewPiece('b', 8, new Cavalo(board, Color.BLACK));
         placeNewPiece('c', 8, new Bispo(board, Color.BLACK));
         placeNewPiece('e', 8, new Rei(board, Color.BLACK));
         placeNewPiece('f', 8, new Bispo(board, Color.BLACK));
+        placeNewPiece('g', 8, new Cavalo(board, Color.BLACK));
         placeNewPiece('h', 8, new Torre(board, Color.BLACK));
         placeNewPiece('a', 7, new Peao(board, Color.BLACK));
         placeNewPiece('b', 7, new Peao(board, Color.BLACK));
